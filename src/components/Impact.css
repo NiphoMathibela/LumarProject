@@ -1,0 +1,140 @@
+.impact {
+  padding: 120px 0;
+  background: var(--bg-primary);
+}
+
+.impact__header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 80px;
+}
+
+.impact__tag {
+  display: inline-block;
+  padding: 8px 16px;
+  background: var(--primary-100);
+  border: 1px solid var(--primary-200);
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-700);
+  margin-bottom: 20px;
+}
+
+.impact__title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.impact__title-gradient {
+  background: linear-gradient(135deg, var(--primary-600), var(--accent-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.impact__description {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.impact__grid {
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .impact__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .impact__grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.impact__card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 32px;
+  text-align: center;
+  transition: all 0.4s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.impact__card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  border-radius: 12px;
+  margin: 0 auto 20px;
+}
+
+.impact__card-icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.impact__card:nth-child(2) .impact__card-icon {
+  background: linear-gradient(135deg, var(--accent-500), var(--accent-600));
+}
+
+.impact__card:nth-child(3) .impact__card-icon {
+  background: linear-gradient(135deg, var(--secondary-500), var(--secondary-600));
+}
+
+.impact__card:nth-child(4) .impact__card-icon {
+  background: linear-gradient(135deg, var(--primary-700), var(--primary-800));
+}
+
+.impact__card:nth-child(5) .impact__card-icon {
+  background: linear-gradient(135deg, var(--accent-600), var(--accent-700));
+}
+
+.impact__card-value {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.impact__card-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.impact__card-description {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .impact {
+    padding: 80px 0;
+  }
+
+  .impact__header {
+    margin-bottom: 48px;
+  }
+}
