@@ -9,7 +9,7 @@ const testimonials = [
     author: 'Amanda Sikhakhane',
     role: 'Candidate',
     type: 'candidate',
-    video: 'https://streamable.com/m1pu68',
+    video: '/Testimony1.mp4',
     thumbnail: '/Test1Thumb.png',
   },
   {
@@ -23,21 +23,12 @@ const testimonials = [
   },
   {
     id: 3,
-    quote: "The training sessions gave me confidence I didn't know I had. I walked into the job market prepared, and it made all the difference.",
-    author: 'Placed Candidate',
-    role: 'Candidate',
+    quote: "Lumar Careers gives us that closure by assisting us with revamping our CVs and helping us get better information on how workspaces actually run and work in this day and age. They assist us with interview preparations, and trust me, it actually helps.",
+    author: 'Hangwani Kwinda',
+    role: 'Job Seeker',
     type: 'candidate',
-    video: 'https://test-videos.co.uk/vids/jellyfish/mp4/h264/360/Jellyfish_360_10s_2MB.mp4',
-    thumbnail: 'https://images.pexels.com/photos/9301461/pexels-photo-9301461.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  },
-  {
-    id: 4,
-    quote: "Transparent, professional, and impactful - that's how I'd describe their work. We've seen real results with the talent they've prepared.",
-    author: 'Company Director',
-    role: 'Partner Organization',
-    type: 'employer',
-    video: 'https://test-videos.co.uk/vids/jellyfish/mp4/h264/720/Jellyfish_720_10s_5MB.mp4',
-    thumbnail: 'https://images.pexels.com/photos/20374423/pexels-photo-20374423.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    video: '/Testimony3.mp4',
+    thumbnail: '/Test3Thumb.png',
   },
 ];
 
@@ -56,6 +47,7 @@ function VideoCard({ testimonial, isActive, onPlay }) {
     } else {
       video.pause();
       setIsPlaying(false);
+      onPlay(null); // Notify parent that video is paused
     }
   };
 
@@ -63,9 +55,18 @@ function VideoCard({ testimonial, isActive, onPlay }) {
     const video = videoRef.current;
     if (!video) return;
 
-    const handlePause = () => setIsPlaying(false);
-    const handlePlay = () => setIsPlaying(true);
-    const handleEnded = () => setIsPlaying(false);
+    const handlePause = () => {
+      setIsPlaying(false);
+      onPlay(null); // Notify parent when video is paused
+    };
+    const handlePlay = () => {
+      setIsPlaying(true);
+      onPlay(testimonial.id);
+    };
+    const handleEnded = () => {
+      setIsPlaying(false);
+      onPlay(null); // Notify parent when video ends
+    };
 
     video.addEventListener('pause', handlePause);
     video.addEventListener('play', handlePlay);
@@ -76,7 +77,16 @@ function VideoCard({ testimonial, isActive, onPlay }) {
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('ended', handleEnded);
     };
-  }, []);
+  }, [testimonial.id, onPlay]);
+
+  // Pause video when it's not the active testimonial
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video && !isActive) {
+      video.pause();
+      setIsPlaying(false);
+    }
+  }, [isActive]);
 
   return (
     <div className={`testimonials__video-card ${isActive ? 'active' : ''}`}>
@@ -133,11 +143,19 @@ export default function Testimonials() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   useEffect(() => {
+    // Only auto-slide if no video is playing
+    if (playingId !== null) return;
+
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
     }, 6000);
+    
     return () => clearInterval(interval);
-  }, []);
+  }, [playingId]); // Re-run effect when playingId changes
+
+  const handlePlay = (id) => {
+    setPlayingId(id);
+  };
 
   return (
     <section className="testimonials" ref={ref}>
@@ -172,7 +190,7 @@ export default function Testimonials() {
               <VideoCard
                 testimonial={testimonials[activeIndex]}
                 isActive={true}
-                onPlay={(id) => setPlayingId(id)}
+                onPlay={handlePlay}
               />
             </motion.div>
           </AnimatePresence>
@@ -182,7 +200,10 @@ export default function Testimonials() {
               <motion.button
                 key={t.id}
                 className={`testimonials__item ${index === activeIndex ? 'active' : ''}`}
-                onClick={() => setActiveIndex(index)}
+                onClick={() => {
+                  setActiveIndex(index);
+                  setPlayingId(null); // Reset playing state when manually selecting
+                }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
@@ -206,7 +227,10 @@ export default function Testimonials() {
             <button
               key={index}
               className={`testimonials__dot ${index === activeIndex ? 'active' : ''}`}
-              onClick={() => setActiveIndex(index)}
+              onClick={() => {
+                setActiveIndex(index);
+                setPlayingId(null); // Reset playing state when manually selecting
+              }}
               aria-label={`Go to testimonial ${index + 1}`}
             />
           ))}
