@@ -14,12 +14,12 @@ const testimonials = [
   },
   {
     id: 2,
-    quote: "Lumar Careers gave me the confidence to go through with my interviews by articulating myself well in conversation, by dressing the part, by being able to have the confidence to speak and let my employer, potential employer, know. And they gave me the opportunity for my first interview post-matric.",
-    author: 'Shannon Godfrey',
+    quote: "I would like to thank Lumar Careers for helping me with my new CV, making it look more professional and presentable. I belive it will help stand out to recruiters.",
+    author: 'Siyanda Ngcobo',
     role: 'Job Seeker',
-    type: 'employer',
-    video: '/Testimony2.mp4',
-    thumbnail: '/Test2Thumb.png',
+    type: 'candidate',
+    video: '/Testimony5.mp4',
+    thumbnail: '/Test5Thumb.png',
   },
   {
     id: 3,
