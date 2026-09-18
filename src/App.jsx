@@ -10,6 +10,7 @@ import Process from './components/Process';
 import Hosting from './components/Hosting';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
 
 function HomePage() {
   return (
@@ -78,6 +79,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <WhatsAppButton/>
       </div>
     </BrowserRouter>
   );
