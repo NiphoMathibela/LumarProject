@@ -23,12 +23,12 @@ const testimonials = [
   },
   {
     id: 3,
-    quote: "Lumar Careers gives us that closure by assisting us with revamping our CVs and helping us get better information on how workspaces actually run and work in this day and age. They assist us with interview preparations, and trust me, it actually helps.",
-    author: 'Hangwani Kwinda',
+    quote: "When I aquired the services of Lumar Careers they gave me the confidence to go through with my interviews by articulating myself well in interviews.",
+    author: 'Shannon Godfrey',
     role: 'Job Seeker',
     type: 'candidate',
-    video: '/Testimony3.mp4',
-    thumbnail: '/Test3Thumb.png',
+    video: '/Testimony2.mp4',
+    thumbnail: '/Test2Thumb.png',
   },
 ];
 
